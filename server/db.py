@@ -20,6 +20,23 @@ class User(Base):
     def __repr__(self):
            return f"User | id={self.id} | firstname={self.firstname}| lastname={self.lastname}"
     
+class Artist(Base):
+    __tablename__ = 'artists'
+
+    id = Column(String, primary_key=True)
+    name = Column(String)
+    genre = Column(String)
+    image_url = Column(String)
+    
+    def __init__(self, id, name, genre, image_url):
+        self.id = id
+        self.name = name
+        self.genre = genre
+        self.image_url = image_url
+
+    def __repr__(self):
+        return f"Artist | id={self.id} | name={self.name} | genre={self.genre} | image_url={self.image_url}"
+
 
 # Create an engine that stores data in a SQLite file
 engine = create_engine('sqlite:///earlybird.db', echo=True)
@@ -29,13 +46,13 @@ Base.metadata.create_all(bind=engine)
 
 # Create a configured "Session" class and create a Session
 Session = sessionmaker(bind=engine)
-session = Session()
+# session = Session()
 
-# Example: Add a user
+## Example: Add a user
 # user = User(firstname='John', lastname='Doe', password='password')
 # session.add(user)
 # session.commit()
 
 # Example: Query all users
-allUsers = session.query(User).all()
-print(allUsers)
+# allUsers = session.query(User).all()
+# print(allUsers)
